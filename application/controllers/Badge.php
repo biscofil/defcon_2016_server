@@ -19,10 +19,11 @@ class Badge extends CI_Controller {
 
             $text_color = imagecolorallocate($im, 0, 0, 0);
             imagestring($im, 30, 55, 15, $struttura['nome'], $text_color);
+            $text_color = imagecolorallocate($im, 60, 60, 60);
             imagestring($im, 13, 200, 36, date("d.m"), $text_color);
 
             $col_ellipse = imagecolorallocate($im, 127, 45, 180);
-            imagefilledellipse($im, 220, 20, 20, 20, $col_ellipse);
+            imagefilledrectangle($im, 220, 10, 240, 30, $col_ellipse);
 
             imagepng($im);
             imagedestroy($im);

@@ -1,0 +1,11 @@
+#defcon2016_badge {
+    transition: .2s;
+    filter: none; /* IE6-9 */
+    -webkit-filter: grayscale(0%); /* Chrome 19+ & Safari 6+ */
+}
+
+#defcon2016_badge:hover {
+    transition: .2s;
+    filter: gray;
+    -webkit-filter: grayscale(100%);
+}

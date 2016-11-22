@@ -130,6 +130,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="features_productarea">
                 <div class="container">
                     <div class="row">
@@ -147,8 +148,9 @@
                                         <span class="fa fa-clock-o clock_icon"></span>
                                     </a>
                                     <div class="media-body media_content">
-                                        <h4>Beautiful, modern design</h4>
-                                        <p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata.</p>
+                                        <h4>Badge per il web</h4>
+                                        <p>Includi un badge che riporta il tuo punteggio.</p>
+                                        <a href="http://defcon2016.altervista.org/index.php/badge">Scopri</a>
                                     </div>
                                 </div>
                                 <div class="media features_widget">
