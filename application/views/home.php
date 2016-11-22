@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>AppStation : Home</title>
+
+        <!-- Bootstrap -->
+        <link href="<?= base_url('public/themes/AppStation/css/bootstrap.min.css') ?>" rel="stylesheet">
+        <!-- Slick slider css -->
+        <link href="<?= base_url('public/themes/AppStation/css/skdslider.css') ?>" rel="stylesheet">
+        <!-- Font awesome css -->
+        <link rel="stylesheet" href="<?= base_url('public/themes/AppStation/css/font-awesome.min.css') ?>">
+        <!-- smooth animate css file -->
+        <link rel="stylesheet" href="<?= base_url('public/themes/AppStation/css/animate.css') ?>">
+        <!-- Main style css -->
+        <link rel="stylesheet" href="<?= base_url('public/themes/AppStation/style.css') ?>">
+        <!-- Favicon -->
+        <link rel="shortcut icon" type="image/png" href="<?= base_url('public/themes/AppStation/img/favicon.png') ?>"/>
+        <!-- Google Fonts -->
+        <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css'>
+
+
+
+        <!-- Initialize jQuery Library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src = "https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+              <![endif]-->
+    </head>
+
+    <body>
+        <!-- BEGAIN PRELOADER -->
+        <div id="preloader">
+            <div id="status">&nbsp;</div>
+        </div>
+        <!-- END PRELOADER -->
+
+        <!-- START HEADER SECTION -->
+        <header id="headerArea">
+            <a href="#" class="scrollToTop"><i class="fa fa-angle-up"></i></a>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="slider_area">
+                        <div class="menuarea">
+                            <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+                                <div class="container">
+                                    <div class="navbar-header">
+                                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                            <span class="sr-only">Toggle navigation</span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                            <span class="icon-bar"></span>
+                                        </button>
+                                        <!-- For Text Logo -->
+                                        <a class="navbar-brand logo" href="#"><span>App</span>Station</a>
+                                        <!-- For Img Logo -->
+                                        <!--  <a class="navbar-brand logo" href="#"><img src="img/logo.png" alt="logo"></a> -->
+                                    </div>
+                                    <div id="navbar" class="navbar-collapse collapse">
+                                        <ul class="nav navbar-nav navbar-right custom_nav mobnav" id="top-menu">
+                                            <li class="active"><a href="#headerArea">HOME</a></li>
+                                            <li><a href="#featuresSection">FEATURES </a></li>
+                                            <li><a href="#download">DOWNLOAD </a></li>
+                                            <li><a href="#contact">CONTACT</a></li>
+                                        </ul>
+                                    </div><!--/.nav-collapse -->
+                                </div>
+                            </div>
+                        </div>
+                        <ul id="demo1" class="slides">
+                            <li>
+                                <img src="<?= base_url('public/themes/AppStation/img/slider/asfalt.png') ?>" />
+                                <!--Slider Description example-->
+                                <div class="slide-desc">
+                                    <div class="slide_descleft">
+                                        <img src="<?= base_url('public/themes/AppStation/img/mobileapp_img.png') ?>" alt="img">
+                                    </div>
+                                    <div class="slide_descright">
+                                        <h1>Build With Bootstrap V3.1.1</h1>
+                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <img src="<?= base_url('public/themes/AppStation/img/slider/dark_wall.png') ?>" />
+                                <div class="slide-desc">
+                                    <div class="slide_descleft">
+                                        <img src="<?= base_url('public/themes/AppStation/img/mobileapp_img.png') ?>" alt="img">
+                                    </div>
+                                    <div class="slide_descright">
+                                        <h1>Fully Responsive Theme</h1>
+                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <img src="<?= base_url('public/themes/AppStation/img/slider/stardust.png') ?>" />
+                                <div class="slide-desc">
+                                    <div class="slide_descleft">
+                                        <img src="<?= base_url('public/themes/AppStation/img/mobileapp_img.png') ?>" alt="img">
+                                    </div>
+                                    <div class="slide_descright">
+                                        <h1>Crystal Clear Coding </h1>
+                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <img src="<?= base_url('public/themes/AppStation/img/slider/dark_wood.png') ?>" />
+                                <div class="slide-desc">
+                                    <div class="slide_descleft">
+                                        <img src="<?= base_url('public/themes/AppStation/img/mobileapp_img.png') ?>" alt="img">
+                                    </div>
+                                    <div class="slide_descright">
+                                        <h1>Build With Bootstrap V3.1.1</h1>
+                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make</p>
+                                        <div class="header_btnarea">
+                                            <a href="#" class="learnmore_btn">Learn More</a>
+                                            <a href="#" class="download_btn">Download</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- END HEADER SECTION -->
+
+        <!-- START FEATURES SECTION -->
+        <section id="featuresSection">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="features_ara">
+                            <h1>Buildt with Bootstrap v3.1.1</h1>
+                            <p> Lorem ipsum dolor sit amet. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
+                                amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- START FEATURES PRODUCT AREA -->
+            <div class="features_productarea">
+                <div class="container">
+                    <!-- START FIRST FEATURES PRODUCT -->
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="featprodcs_img wow fadeInLeft">
+                                <img class="img-responsive" src="<?= base_url('public/themes/AppStation/img/mobile_img1.png') ?>" alt="img">
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="featprodcs_content wow fadeInRight">
+                                <h1>Detailed documentation</h1>
+                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. Stet clita kasd gubergren, no sea takimata.</p>
+                                <div class="media features_widget">
+                                    <a class="pull-left" href="#">
+                                        <span class="fa fa-clock-o clock_icon"></span>
+                                    </a>
+                                    <div class="media-body media_content">
+                                        <h4>Beautiful, modern design</h4>
+                                        <p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata.</p>
+                                    </div>
+                                </div>
+                                <div class="media features_widget">
+                                    <a class="pull-left" href="#">
+                                        <span class="fa fa-wrench clock_icon"></span>
+                                    </a>
+                                    <div class="media-body media_content">
+                                        <h4>Easy to set up</h4>
+                                        <p>At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- START FEATURES PRODUCT AREA -->
+            <div id="download" class="features_productarea sample_appparea">
+                <!-- START APP DOWNLOAD AREA -->
+                <div class="row" >
+                    <div class="col-lg-12 col-md-12">
+                        <div class="appdownload_area">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12">
+                                    <div class="appdownload">
+                                        <p><span>Scarica ora!</span></p>
+
+                                        <a href="#" id="download_android" class="download_btn appdown_btn">Android</a>
+                                        <a href="#" id="download_ios" class="download_btn appdown_btn">Ios</a>
+
+                                        <script>
+                                            $("#download_ios").mouseover(function () {
+                                                $("#download_ios").html("Android");
+                                                $("#download_android").html("Ios");
+                                            });
+
+                                            $("#download_android").mouseover(function () {
+                                                $("#download_ios").html("Ios");
+                                                $("#download_android").html("Android");
+                                            });
+
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- START CONTACT SECTION -->
+        <section id="contact">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="contact_area">
+                            <h1>Get in touch</h1>
+                            <p>Feel free to ask any questions via the contact form below.</p>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="contact_left wow fadeInLeft">
+                                        <h1>Contact</h1>
+                                        <div class="media contact_media">
+                                            <i class="fa fa-phone"></i>
+                                            <div class="media-body contact_media_body">
+                                                <h4>Phone: +120568974564</h4>
+                                            </div>
+                                        </div>
+                                        <div class="media contact_media">
+                                            <i class="fa fa-envelope"></i>
+                                            <div class="media-body contact_media_body">
+                                                <h4>Email:info@codeengine.com</h4>
+                                            </div>
+                                        </div>
+                                        <div class="media contact_media">
+                                            <i class="fa fa-map-marker"></i>
+                                            <div class="media-body contact_media_body">
+                                                <h4>Address: Lombard, IL, United States</h4>
+                                            </div>
+                                        </div>
+                                        <div class="contact_social">
+                                            <h1>Social</h1>
+                                            <a class="fb" href="#"><i class="fa fa-facebook"></i></a>
+                                            <a class="twitter" href="#"><i class="fa fa-twitter"></i></a>
+                                            <a class="gplus" href="#"><i class="fa fa-google-plus"></i></a>
+                                            <a class="pinterest" href="#"><i class="fa fa-pinterest"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6">
+                                    <div class="contact_right wow fadeInRight">
+                                        <div id="form-messages"></div>
+                                        <form class="footer_form">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6">
+                                                    <div class="form-grooup">
+                                                        <input type="text" class="form-control" placeholder="Name" required>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6">
+                                                    <div class="form-group">
+                                                        <input type="email" class="form-control" placeholder="Email (Required)" required>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12">
+                                                    <div class="form-group">
+                                                        <textarea class="form-control"  cols="30" rows="8" placeholder="Message"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input class="contact_sendbtn" type="submit" value="Send">
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- END CONTACT SECTION -->
+
+        <!-- START FOOTER SECTION -->
+        <footer id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12">
+                        <div class="footer_area">
+                            <p>Designed By <a href="http://wpfreeware.com/" rel="nofollow">WpFreeware</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- END FOOTER SECTION -->
+
+        <!-- Skds slider -->
+        <script src="<?= base_url('public/themes/AppStation/js/skdslider.min.js') ?>"></script>
+        <!-- Bootstrap js  -->
+        <script src="<?= base_url('public/themes/AppStation/js/bootstrap.min.js') ?>"></script>
+        <!-- For smooth animatin  -->
+        <script src="<?= base_url('public/themes/AppStation/js/wow.min.js') ?>"></script>
+
+        <!-- Custom js -->
+        <script type="text/javascript" src="<?= base_url('public/themes/AppStation/js/custom.js') ?>"></script>
+
+    </body>
+</html>
