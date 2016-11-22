@@ -6,41 +6,28 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>AppStation : Home</title>
 
-        <!-- Bootstrap -->
         <link href="<?= base_url('public/themes/AppStation/css/bootstrap.min.css') ?>" rel="stylesheet">
-        <!-- Slick slider css -->
         <link href="<?= base_url('public/themes/AppStation/css/skdslider.css') ?>" rel="stylesheet">
-        <!-- Font awesome css -->
         <link rel="stylesheet" href="<?= base_url('public/themes/AppStation/css/font-awesome.min.css') ?>">
-        <!-- smooth animate css file -->
         <link rel="stylesheet" href="<?= base_url('public/themes/AppStation/css/animate.css') ?>">
-        <!-- Main style css -->
         <link rel="stylesheet" href="<?= base_url('public/themes/AppStation/style.css') ?>">
-        <!-- Favicon -->
         <link rel="shortcut icon" type="image/png" href="<?= base_url('public/themes/AppStation/img/favicon.png') ?>"/>
-        <!-- Google Fonts -->
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,100' rel='stylesheet' type='text/css'>
 
-
-
-        <!-- Initialize jQuery Library -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
-          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-<script src = "https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-              <![endif]-->
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src = "https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
     </head>
 
     <body>
-        <!-- BEGAIN PRELOADER -->
         <div id="preloader">
             <div id="status">&nbsp;</div>
         </div>
-        <!-- END PRELOADER -->
 
-        <!-- START HEADER SECTION -->
         <header id="headerArea">
             <a href="#" class="scrollToTop"><i class="fa fa-angle-up"></i></a>
             <div class="row">
@@ -68,14 +55,13 @@
                                             <li><a href="#download">DOWNLOAD </a></li>
                                             <li><a href="#contact">CONTACT</a></li>
                                         </ul>
-                                    </div><!--/.nav-collapse -->
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <ul id="demo1" class="slides">
                             <li>
                                 <img src="<?= base_url('public/themes/AppStation/img/slider/asfalt.png') ?>" />
-                                <!--Slider Description example-->
                                 <div class="slide-desc">
                                     <div class="slide_descleft">
                                         <img src="<?= base_url('public/themes/AppStation/img/mobileapp_img.png') ?>" alt="img">
@@ -131,9 +117,7 @@
                 </div>
             </div>
         </header>
-        <!-- END HEADER SECTION -->
 
-        <!-- START FEATURES SECTION -->
         <section id="featuresSection">
             <div class="container">
                 <div class="row">
@@ -146,10 +130,8 @@
                     </div>
                 </div>
             </div>
-            <!-- START FEATURES PRODUCT AREA -->
             <div class="features_productarea">
                 <div class="container">
-                    <!-- START FIRST FEATURES PRODUCT -->
                     <div class="row">
                         <div class="col-lg-6 col-md-6">
                             <div class="featprodcs_img wow fadeInLeft">
@@ -184,9 +166,7 @@
                 </div>
             </div>
 
-            <!-- START FEATURES PRODUCT AREA -->
             <div id="download" class="features_productarea sample_appparea">
-                <!-- START APP DOWNLOAD AREA -->
                 <div class="row" >
                     <div class="col-lg-12 col-md-12">
                         <div class="appdownload_area">
@@ -194,21 +174,17 @@
                                 <div class="col-lg-12 col-md-12">
                                     <div class="appdownload">
                                         <p><span>Scarica ora!</span></p>
-
                                         <a href="#" id="download_android" class="download_btn appdown_btn">Android</a>
                                         <a href="#" id="download_ios" class="download_btn appdown_btn">Ios</a>
-
                                         <script>
                                             $("#download_ios").mouseover(function () {
                                                 $("#download_ios").html("Android");
                                                 $("#download_android").html("Ios");
                                             });
-
                                             $("#download_android").mouseover(function () {
                                                 $("#download_ios").html("Ios");
                                                 $("#download_android").html("Android");
                                             });
-
                                         </script>
                                     </div>
                                 </div>
@@ -219,7 +195,6 @@
             </div>
         </section>
 
-        <!-- START CONTACT SECTION -->
         <section id="contact">
             <div class="container">
                 <div class="row">
@@ -291,9 +266,7 @@
                 </div>
             </div>
         </section>
-        <!-- END CONTACT SECTION -->
 
-        <!-- START FOOTER SECTION -->
         <footer id="footer">
             <div class="container">
                 <div class="row">
@@ -305,17 +278,10 @@
                 </div>
             </div>
         </footer>
-        <!-- END FOOTER SECTION -->
 
-        <!-- Skds slider -->
         <script src="<?= base_url('public/themes/AppStation/js/skdslider.min.js') ?>"></script>
-        <!-- Bootstrap js  -->
         <script src="<?= base_url('public/themes/AppStation/js/bootstrap.min.js') ?>"></script>
-        <!-- For smooth animatin  -->
         <script src="<?= base_url('public/themes/AppStation/js/wow.min.js') ?>"></script>
-
-        <!-- Custom js -->
         <script type="text/javascript" src="<?= base_url('public/themes/AppStation/js/custom.js') ?>"></script>
-
     </body>
 </html>
