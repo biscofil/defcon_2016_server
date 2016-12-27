@@ -44,7 +44,7 @@
                                             <span class="icon-bar"></span>
                                         </button>
                                         <!-- For Text Logo -->
-                                        <a class="navbar-brand logo" href="#"><span>App</span>Station</a>
+                                        <a class="navbar-brand logo" href="#"><span>Eco</span>Me</a>
                                         <!-- For Img Logo -->
                                         <!--  <a class="navbar-brand logo" href="#"><img src="img/logo.png" alt="logo"></a> -->
                                     </div>
