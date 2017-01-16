@@ -5,6 +5,13 @@ abstract class OpenData {
     protected $url = null;
     protected $content = null;
     private $_id = null;
+    private $CI;
+
+    public function __construct($url, $id) {
+        $this->url = $url;
+        $this->_id = $id;
+        $this->CI = &get_instance();
+    }
 
     private static function getTableName($id) {
         return "opendata_$id";
@@ -24,26 +31,52 @@ abstract class OpenData {
         $row = array_combine($header, $row);
     }
 
-    public function __construct($url, $id) {
-        $this->url = $url;
-        $this->_id = $id;
-    }
-
     public function run() {
         try {
-            echo $this->databaseExist() ? "ESISTE DB" : "DB DA CREARE<br>";
-
             $this->download();
-            return $this->custom_parse();
+            $this->_db_insert_data($this->custom_parse());
         } catch (Exception $exc) {
             throw new Exception("Errore: " . $exc->getMessage());
         }
     }
 
-    public function databaseExist() {
-        $CI = &get_instance();
-        return $CI->db->table_exists(self::getTableName($this->_id));
+    //db
+
+    public function _db_table_exist() {
+        return $this->CI->db->table_exists(self::getTableName($this->_id));
     }
+
+    public function _db_insert_data($data) {
+        if ($this->_db_table_exist()) {
+            $this->_db_clear_data();
+        } else {
+            $this->_db_create_table();
+        }
+        $this->CI->db->insert_batch(self::getTableName($this->_id), $data);
+    }
+
+    public function _db_clear_data() {
+        $this->CI->db->where("1", "1");
+        $this->CI->db->delete(self::getTableName($this->_id));
+    }
+
+    public function _db_create_table() {
+        $_tn = self::getTableName($this->_id);
+        //SQL DDL
+        $this->CI->db->query("CREATE TABLE IF NOT EXISTS $_tn ("
+                . 'id int(11) NOT NULL,'
+                . 'lat decimal(12,8) NOT NULL,'
+                . 'lng decimal(12,8) NOT NULL,'
+                . 'ozono varchar(20) DEFAULT NULL,'
+                . 'pm10 varchar(20) DEFAULT NULL,'
+                . 'data_ozono varchar(20) DEFAULT NULL,'
+                . 'data_pm10 varchar(20) DEFAULT NULL,'
+                . 'weight decimal(10,5) NOT NULL DEFAULT \'1.00000\','
+                . 'PRIMARY KEY (id)'
+                . ') ENGINE=InnoDB DEFAULT CHARSET=utf8;');
+    }
+
+    //abstract
 
     public abstract function download();
 

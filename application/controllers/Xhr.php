@@ -21,7 +21,7 @@ class Xhr extends XhrController {
         self::def_end($res, 'dati', $res);
     }
 
-    public function xhr_licenze($id = null) {
+    public function xhr_licenze() {
         $res = $this->base_model->getAllOpendata();
         self::def_end($res, 'dati', $res);
     }

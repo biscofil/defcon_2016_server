@@ -29,11 +29,7 @@ class Admin extends CI_Controller {
                 echo "<h1>$name</h1><br>";
                 $this->load->library('opendata/' . $class_name, NULL, $name);
 
-                $k = $this->{$name}->run();
-
-                print_r($k);
-
-                echo count($k) . " righe<br>";
+                $this->{$name}->run();
 
                 unset($this->{$name});
             } catch (Exception $exc) {
