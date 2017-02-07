@@ -1,6 +1,12 @@
 <?php
 
-class XhrController extends CI_Controller {
+class DataClass extends CI_Controller {
+
+    public $data = array();
+
+}
+
+class XhrController extends DataClass {
 
     public function __construct() {
         parent::__construct();

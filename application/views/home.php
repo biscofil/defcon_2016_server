@@ -64,7 +64,7 @@
                                 <img src="<?= base_url('public/themes/AppStation/img/slider/asfalt.png') ?>" />
                                 <div class="slide-desc">
                                     <div class="slide_descleft">
-                                        <img src="<?= base_url('public/themes/AppStation/img/mobileapp_img.png') ?>" alt="img">
+                                        <img src="<?= base_url('public/themes/AppStation/img/mobile_img1.png') ?>" alt="img">
                                     </div>
                                     <div class="slide_descright">
                                         <h1>Build With Bootstrap V3.1.1</h1>
@@ -76,7 +76,7 @@
                                 <img src="<?= base_url('public/themes/AppStation/img/slider/dark_wall.png') ?>" />
                                 <div class="slide-desc">
                                     <div class="slide_descleft">
-                                        <img src="<?= base_url('public/themes/AppStation/img/mobileapp_img.png') ?>" alt="img">
+                                        <img src="<?= base_url('public/themes/AppStation/img/mobile_img2.png') ?>" alt="img">
                                     </div>
                                     <div class="slide_descright">
                                         <h1>Fully Responsive Theme</h1>
@@ -88,7 +88,7 @@
                                 <img src="<?= base_url('public/themes/AppStation/img/slider/stardust.png') ?>" />
                                 <div class="slide-desc">
                                     <div class="slide_descleft">
-                                        <img src="<?= base_url('public/themes/AppStation/img/mobileapp_img.png') ?>" alt="img">
+                                        <img src="<?= base_url('public/themes/AppStation/img/mobile_img3.png') ?>" alt="img">
                                     </div>
                                     <div class="slide_descright">
                                         <h1>Crystal Clear Coding </h1>
@@ -100,13 +100,13 @@
                                 <img src="<?= base_url('public/themes/AppStation/img/slider/dark_wood.png') ?>" />
                                 <div class="slide-desc">
                                     <div class="slide_descleft">
-                                        <img src="<?= base_url('public/themes/AppStation/img/mobileapp_img.png') ?>" alt="img">
+                                        <img src="<?= base_url('public/themes/AppStation/img/mobile_img4.png') ?>" alt="img">
                                     </div>
                                     <div class="slide_descright">
                                         <h1>Build With Bootstrap V3.1.1</h1>
                                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make</p>
                                         <div class="header_btnarea">
-                                            <a href="#" class="learnmore_btn">Learn More</a>
+                                            <a href="<?= site_url("strutture") ?>" class="learnmore_btn">Strutture</a>
                                             <a href="#" class="download_btn">Download</a>
                                         </div>
                                     </div>
@@ -176,8 +176,8 @@
                                 <div class="col-lg-12 col-md-12">
                                     <div class="appdownload">
                                         <p><span>Scarica ora!</span></p>
-                                        <a href="#" id="download_android" class="download_btn appdown_btn">Android</a>
-                                        <a href="#" id="download_ios" class="download_btn appdown_btn">Ios</a>
+                                        <a href="https://play.google.com/store/apps/details?id=com.biscofil.defcon2016" id="download_android" class="download_btn appdown_btn">Android</a>
+                                        <a href="https://play.google.com/store/apps/details?id=com.biscofil.defcon2016" id="download_ios" class="download_btn appdown_btn">Ios</a>
                                         <script>
                                             $("#download_ios").mouseover(function () {
                                                 $("#download_ios").html("Android");

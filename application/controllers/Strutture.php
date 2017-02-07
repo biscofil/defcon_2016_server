@@ -6,23 +6,36 @@
  * and open the template in the editor.
  */
 
-class Strutture extends CI_Controller {
+class Strutture extends DataClass {
 
     function __construct() {
         parent::__construct();
     }
 
     function index() {
+        $this->data['strutture'] = $this->base_model->getSiteStrutture();
 
+        $this->load->view('common/header', $this->data);
+        $this->load->view('pages/strutture', $this->data);
+        $this->load->view('common/footer', $this->data);
     }
 
     function s($id = null) {
         if (!is_null($id)) {
-            $struttura = $this->base_model->getStruttura(intval($id));
-            echo "<pre>";
-            print_r($struttura);
-            echo "</pre>";
+            $this->data['struttura'] = $this->base_model->getSiteStruttura(intval($id));
         }
+
+        $this->load->view('common/header', $this->data);
+        $this->load->view('pages/struttura', $this->data);
+        $this->load->view('common/footer', $this->data);
+    }
+
+    function rank() {
+        $this->data['strutture'] = $this->base_model->getSiteStruttureRank();
+
+        $this->load->view('common/header', $this->data);
+        $this->load->view('pages/rank', $this->data);
+        $this->load->view('common/footer', $this->data);
     }
 
 }
