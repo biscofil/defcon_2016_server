@@ -73,7 +73,7 @@ class base_model extends CI_Model {
     }
 
     public function getStrutture() {
-        $this->db->select('id,nome,lat,lng');
+        $this->db->select('id,nome,lat,lng,last_value,last_value_date');
         $this->db->from('strutture');
 
         $query = $this->db->get();
@@ -112,8 +112,7 @@ class base_model extends CI_Model {
 
     public function getOpenData1() {
         $this->db->select('lat,lng,1 as weight', NULL, FALSE);
-        $this->db->from('opendata_1');
-
+        $this->db->from('dati_pm10');
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
             $row = $query->result_array();
@@ -132,12 +131,20 @@ class base_model extends CI_Model {
         return 1;
     }
 
-    public function avg_pm10($lat, $lng, $radius_km = 60) {
-        $q = 'SELECT AVG(opendata_1.pm10) as avg_pm10 FROM opendata_1 '
-                . 'WHERE (111.1111 * DEGREES(ACOS(COS(RADIANS(opendata_1.lat)) * COS(RADIANS(' . $lat . ')) '
-                . '* COS(RADIANS(opendata_1.lng - ' . $lng . ')) + SIN(RADIANS(opendata_1.lat))* SIN(RADIANS(' . $lat . '))))) < ' . $radius_km;
+    public function avg($lat, $lng, $tab, $radius_km = 10) {
+        $tab = 'dati_' . $tab;
+        $q = 'SELECT AVG(' . $tab . '.valore) as avg FROM ' . $tab . ' '
+                . 'WHERE (111.1111 * DEGREES(ACOS(COS(RADIANS(' . $tab . '.lat)) * COS(RADIANS(' . $lat . ')) '
+                . '* COS(RADIANS(' . $tab . '.lng - ' . $lng . ')) + SIN(RADIANS(' . $tab . '.lat))* SIN(RADIANS(' . $lat . '))))) < ' . $radius_km;
         $query = $this->db->query($q)->row();
-        return $query->avg_pm10;
+        return $query->avg;
+    }
+
+    public function updatePunteggioStruttura($id, $data, $punteggio) {
+        $this->db->set('last_value_date', $data);
+        $this->db->set('last_value', $punteggio);
+        $this->db->where('id', $id);
+        $this->db->update('strutture');
     }
 
 }

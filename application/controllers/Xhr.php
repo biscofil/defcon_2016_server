@@ -17,7 +17,16 @@ class Xhr extends XhrController {
     }
 
     public function xhr_struttura($id = null) {
+        is_null($id) && self::_error('id missing');
         $res = $this->base_model->getStruttura($id);
+        (!$res) && self::_error('wrong id');
+
+        $val = $this->struttura_to_value($id);
+        if ($val) {
+            $res['last_value_date'] = date('Y-m-d H:i:s');
+            $res['last_value'] = $val;
+        }
+
         self::def_end($res, 'dati', $res);
     }
 
@@ -38,13 +47,18 @@ class Xhr extends XhrController {
         $lat = floatval($lat);
         $lng = floatval($lng);
 
-        $val = $this->base_model->avg_pm10($lat, $lng);
-        (!$val) && self::_error('calculation error');
+        $indice_pm10 = sottoindice_pm10($this->base_model->avg($lat, $lng, 'pm10'));
+        $indice_ozono = sottoindice_ozono($this->base_model->avg($lat, $lng, 'ozono'));
+        $indice_azoto = 0; //sottoindice_azoto($this->base_model->avg($lat, $lng, 'azoto'));
 
-        if ($raw) {
-            return $val;
+        $val = calcolo_iqa($indice_pm10, $indice_azoto, $indice_ozono);
+
+        $k = nostroindice($val);
+
+        if (!$raw) {
+            return $k;
         } else {
-            echo json_encode(array('val' => $val));
+            echo json_encode(array('val' => $k, 'iqa' => $val, 'pm10' => $indice_pm10, 'ozono' => $indice_ozono, 'azoto' => $indice_ozono));
         }
     }
 
@@ -53,7 +67,7 @@ class Xhr extends XhrController {
      * Richiamare questo da front end
      * @param type $id
      */
-    public function struttura_to_value($id = null, $raw = false) {
+    public function struttura_to_value($id = null) {
         is_null($id) && self::_error('id missing');
         $id = intval($id);
         $struttura = $this->base_model->getStruttura($id);
@@ -65,18 +79,19 @@ class Xhr extends XhrController {
         $datetime1 = new DateTime($struttura['last_value_date']);
         $datetime2 = new DateTime("now");
         $interval = $datetime2->diff($datetime1);
-        $aggiornato = intval($interval->format('%h')) < 24;
+        $aggiornato = intval($interval->format('%h')) < 24; //mettere cambiare
 
         $aggiornato = false; //togliere
         if ($aggiornato) {
-            if ($raw) {
-                return $val;
-            } else {
-                echo json_encode(array('val' => $val));
-            }
+            return false;
         } else {
             //calcola valore
-            return $this->gps_to_value($struttura['lat'], $struttura['lng'], $raw);
+
+            $val_new = $this->gps_to_value($struttura['lat'], $struttura['lng']);
+
+            $this->base_model->updatePunteggioStruttura($id, date('Y-m-d H:i:s'), $val_new);
+
+            return $val_new;
             //aggiorno db
         }
     }

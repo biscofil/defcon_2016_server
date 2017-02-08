@@ -86,3 +86,26 @@ abstract class JSONOpenData extends OpenData {
     }
 
 }
+
+function sottoindice_pm10($media) {
+    return ($media / 50.0 ) * 100.0;
+}
+
+function sottoindice_azoto($media) {
+    return ($media / 200.0 ) * 100.0;
+}
+
+function sottoindice_ozono($media) {
+    return ($media / 120.0 ) * 100.0;
+}
+
+function calcolo_iqa($pm10, $ozono, $azoto) {
+    $list = array($pm10, $ozono, $azoto);
+    sort($list, SORT_NUMERIC);
+    array_shift($list);
+    return ($list[0] + $list[1] ) / 2.0;
+}
+
+function nostroindice($iqa) {
+    return 5 - round(($iqa / 175 ) * 5, 2);
+}
