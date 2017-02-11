@@ -10,10 +10,15 @@ class Badge extends CI_Controller {
 
     public function img($id = null) {
         if (!is_null($id)) {
+
+            is_null($id) && die('id missing');
+            $struttura = $this->base_model->getStruttura(intval($id));
+            (!$struttura) && die('WRONG ID');
+
             header("Content-Type: image/png");
             header('Cache-Control: max-age=86400');
 
-            $struttura = $this->base_model->getStruttura(intval($id));
+            $struttura = get_update_indice($struttura);
 
             $im = imagecreatefrompng("public/badge/back2.png");
 
@@ -22,8 +27,17 @@ class Badge extends CI_Controller {
             $text_color = imagecolorallocate($im, 60, 60, 60);
             imagestring($im, 13, 200, 36, date("d.m"), $text_color);
 
-            $col_ellipse = imagecolorallocate($im, 127, 45, 180);
-            imagefilledrectangle($im, 220, 10, 240, 30, $col_ellipse);
+            if (is_null($struttura['last_value'])) {
+
+            } else {
+                $col = val2col($struttura['last_value']);
+
+                $col_ellipse = imagecolorallocate($im, $col['r'], $col['g'], $col['b']);
+                imagefilledrectangle($im, 200, 10, 240, 30, $col_ellipse);
+
+                $text_color = imagecolorallocate($im, 255, 255, 255);
+                imagestring($im, 13, 205, 12, round($struttura['last_value'], 2), $text_color);
+            }
 
             imagepng($im);
             imagedestroy($im);

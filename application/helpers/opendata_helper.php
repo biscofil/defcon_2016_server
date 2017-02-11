@@ -133,3 +133,119 @@ function nostroindice($iqa) {
 
     //versione B / scala
 }
+
+function get_update_indice($res) {
+    $CI = &get_instance();
+    ///
+    $val = floatval($res['last_value']);
+
+    $datetime1 = new DateTime($res['last_value_date']);
+    $datetime2 = new DateTime("now");
+    $interval = $datetime2->diff($datetime1);
+    $aggiornato = intval($interval->format('%h')) < 1; //mettere cambiare
+
+    if ((!$aggiornato) || is_null($res['last_value'])) {
+        //calcola valore
+        $val_new = helper_gps_to_value($res['lat'], $res['lng'], false);
+        $CI->base_model->updatePunteggioStruttura($res['id'], date('Y-m-d H:i:s'), $val_new);
+
+        $res['last_value_date'] = date('Y-m-d H:i:s');
+        $res['last_value'] = $val_new;
+
+        //aggiorno db
+    }
+    return $res;
+}
+
+function helper_gps_to_value($lat = null, $lng = null, $raw = true) {
+    $CI = &get_instance();
+    $lat = floatval($lat);
+    $lng = floatval($lng);
+    $indice_pm10 = sottoindice_pm10($CI->base_model->avg($lat, $lng, 'pm10'));
+    $indice_ozono = sottoindice_ozono($CI->base_model->avg($lat, $lng, 'ozono'));
+    $indice_azoto = 0; //sottoindice_azoto($this->base_model->avg($lat, $lng, 'azoto'));
+    $val = calcolo_iqa($indice_pm10, $indice_azoto, $indice_ozono);
+    $k = nostroindice($val);
+    if (!$raw) {
+        return $k;
+    } else {
+        echo json_encode(array('val' => $k, 'iqa' => $val, 'pm10' => $indice_pm10, 'ozono' => $indice_ozono, 'azoto' => $indice_ozono));
+    }
+}
+
+function ColorHSLToRGB($h, $s, $l) {
+
+    $r = $l;
+    $g = $l;
+    $b = $l;
+    $v = ($l <= 0.5) ? ($l * (1.0 + $s)) : ($l + $s - $l * $s);
+    if ($v > 0) {
+        $m;
+        $sv;
+        $sextant;
+        $fract;
+        $vsf;
+        $mid1;
+        $mid2;
+
+        $m = $l + $l - $v;
+        $sv = ($v - $m ) / $v;
+        $h *= 6.0;
+        $sextant = floor($h);
+        $fract = $h - $sextant;
+        $vsf = $v * $sv * $fract;
+        $mid1 = $m + $vsf;
+        $mid2 = $v - $vsf;
+
+        switch ($sextant) {
+            case 0:
+                $r = $v;
+                $g = $mid1;
+                $b = $m;
+                break;
+            case 1:
+                $r = $mid2;
+                $g = $v;
+                $b = $m;
+                break;
+            case 2:
+                $r = $m;
+                $g = $v;
+                $b = $mid1;
+                break;
+            case 3:
+                $r = $m;
+                $g = $mid2;
+                $b = $v;
+                break;
+            case 4:
+                $r = $mid1;
+                $g = $m;
+                $b = $v;
+                break;
+            case 5:
+                $r = $v;
+                $g = $m;
+                $b = $mid2;
+                break;
+        }
+    }
+    return array('r' => intval($r * 255.0), 'g' => intval($g * 255.0), 'b' => intval($b * 255.0));
+}
+
+function val2col($hue) {
+    if (!(0 <= $hue && $hue <= 5)) {
+        die("0 < hue < 5");
+    }
+
+    $hue = ( $hue / 5 ) * (255 / 3);
+
+    $sat = 75;
+    $lum = 60;
+
+    $hue /= 360;
+    $sat /= 100;
+    $lum /= 100;
+
+    return ColorHSLToRGB($hue, $sat, $lum);
+}

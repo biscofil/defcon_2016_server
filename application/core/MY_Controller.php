@@ -13,20 +13,28 @@ class XhrController extends DataClass {
         header('Content-Type: application/json');
     }
 
-    public static function _success($data_label = null, $data = null) {
+    private static function final_output($data, $return = false) {
+        if ($return) {
+            return $data;
+        } else {
+            die(json_encode($data));
+        }
+    }
+
+    private static function _success($data_label = null, $data = null, $return = false) {
         $v = array('result' => 1);
         if (!is_null($data_label)) {
             $v[$data_label] = $data;
         }
-        die(json_encode($v));
+        self::final_output($v, $return);
     }
 
-    public static function _error($err = "Errore non specificato", $data = null) {
+    private static function _error($err = "Errore non specificato", $data = null, $return = false) {
         $v = array('result' => 0, 'error' => $err);
         if (!is_null($data)) {
             $v['data'] = $data;
         }
-        die(json_encode($v));
+        self::final_output($v, $return);
     }
 
     public function _remap($method, $params = array()) {
@@ -72,11 +80,11 @@ class XhrController extends DataClass {
         }
     }
 
-    public static function def_end($res, $data_label = null, $data = null, $err = null) {
+    public static function def_end($res, $data_label = null, $data = null, $err = null, $return = false) {
         if ($res) {
-            self::_success($data_label, $data);
+            self::_success($data_label, $data, $return);
         } else {
-            self::_error(is_null($err) ? serialize($res) : $err);
+            self::_error(is_null($err) ? serialize($res) : $err, null, $return);
         }
     }
 
