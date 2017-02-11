@@ -73,7 +73,7 @@ class base_model extends CI_Model {
     }
 
     public function getStrutture() {
-        $this->db->select('id,nome,lat,lng,last_value,last_value_date');
+        $this->db->select('id,nome,lat,lng,last_value,last_value_date,url_img');
         $this->db->from('strutture');
 
         $query = $this->db->get();
@@ -131,13 +131,27 @@ class base_model extends CI_Model {
         return 1;
     }
 
-    public function avg($lat, $lng, $tab, $radius_km = 10) {
+    public function avg($lat, $lng, $tab, $radius_km = 30) {
         $tab = 'dati_' . $tab;
-        $q = 'SELECT AVG(' . $tab . '.valore) as avg FROM ' . $tab . ' '
-                . 'WHERE (111.1111 * DEGREES(ACOS(COS(RADIANS(' . $tab . '.lat)) * COS(RADIANS(' . $lat . ')) '
-                . '* COS(RADIANS(' . $tab . '.lng - ' . $lng . ')) + SIN(RADIANS(' . $tab . '.lat))* SIN(RADIANS(' . $lat . '))))) < ' . $radius_km;
-        $query = $this->db->query($q)->row();
-        return $query->avg;
+        /* $q = 'SELECT AVG(' . $tab . '.valore) as avg FROM ' . $tab
+          . ' WHERE (111.1111 * DEGREES(ACOS(COS(RADIANS(' . $tab . '.lat)) * COS(RADIANS(' . $lat . '))'
+          . ' * COS(RADIANS(' . $tab . '.lng - ' . $lng . ')) + SIN(RADIANS(' . $tab . '.lat))* SIN(RADIANS(' . $lat . '))))) < ' . $radius_km
+          . ' AND data = (SELECT MAX(data) FROM dati_pm10)'; */
+
+
+        $q = 'SELECT ' . $tab . '.valore as val,(111.1111 * DEGREES(ACOS(COS(RADIANS(' . $tab . '.lat)) * COS(RADIANS(' . $lat . '))'
+                . ' * COS(RADIANS(' . $tab . '.lng - ' . $lng . ')) + SIN(RADIANS(' . $tab . '.lat))* SIN(RADIANS(' . $lat . '))))) as distanza '
+                . ' FROM ' . $tab . ' WHERE  data = (SELECT MAX(data) FROM dati_pm10 as kk WHERE kk.id_opendata = id_opendata)'
+                . ' HAVING distanza < ' . $radius_km;
+
+        $query = $this->db->query($q)->result();
+
+        $out = 0;
+        foreach ($query as $mis) {
+            $out += $mis->val * (1 - ($mis->distanza / 300));
+        }
+        $out /= count($query);
+        return $out;
     }
 
     public function updatePunteggioStruttura($id, $data, $punteggio) {

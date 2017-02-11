@@ -79,9 +79,8 @@ class Xhr extends XhrController {
         $datetime1 = new DateTime($struttura['last_value_date']);
         $datetime2 = new DateTime("now");
         $interval = $datetime2->diff($datetime1);
-        $aggiornato = intval($interval->format('%h')) < 24; //mettere cambiare
+        $aggiornato = intval($interval->format('%h')) < 1; //mettere cambiare
 
-        $aggiornato = false; //togliere
         if ($aggiornato) {
             return false;
         } else {
