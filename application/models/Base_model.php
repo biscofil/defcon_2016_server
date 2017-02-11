@@ -84,9 +84,14 @@ class base_model extends CI_Model {
         return false;
     }
 
-    public function getListOpendata() {
+    public function getListOpendata($id = null) {
         $this->db->select('id,class_name');
         $this->db->where('attivo', 1);
+
+        if (!is_null($id)) {
+            $this->db->where('id % 2  = ' . $id, NULL, FALSE);
+        }
+
         $this->db->from('lista_opendata');
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
@@ -123,21 +128,8 @@ class base_model extends CI_Model {
 
     ///
 
-    public function calcValue($lat, $lng) {
-        $q = "SELECT *, 111.1111 * DEGREES(ACOS(COS(RADIANS(lat)) * COS(RADIANS($lat)) * COS(RADIANS(lng - $lng)) "
-                . "+ SIN(RADIANS(lat))* SIN(RADIANS($lat)))) AS distance_in_km FROM strutture";
-        $query = $this->db->query($q)->result();
-        print_r($query);
-        return 1;
-    }
-
     public function avg($lat, $lng, $tab, $radius_km = 30) {
         $tab = 'dati_' . $tab;
-        /* $q = 'SELECT AVG(' . $tab . '.valore) as avg FROM ' . $tab
-          . ' WHERE (111.1111 * DEGREES(ACOS(COS(RADIANS(' . $tab . '.lat)) * COS(RADIANS(' . $lat . '))'
-          . ' * COS(RADIANS(' . $tab . '.lng - ' . $lng . ')) + SIN(RADIANS(' . $tab . '.lat))* SIN(RADIANS(' . $lat . '))))) < ' . $radius_km
-          . ' AND data = (SELECT MAX(data) FROM dati_pm10)'; */
-
 
         $q = 'SELECT ' . $tab . '.valore as val,(111.1111 * DEGREES(ACOS(COS(RADIANS(' . $tab . '.lat)) * COS(RADIANS(' . $lat . '))'
                 . ' * COS(RADIANS(' . $tab . '.lng - ' . $lng . ')) + SIN(RADIANS(' . $tab . '.lat))* SIN(RADIANS(' . $lat . '))))) as distanza '
@@ -145,6 +137,9 @@ class base_model extends CI_Model {
                 . ' HAVING distanza < ' . $radius_km;
 
         $query = $this->db->query($q)->result();
+
+        if (count($query) == 0)
+            return null;
 
         $out = 0;
         foreach ($query as $mis) {

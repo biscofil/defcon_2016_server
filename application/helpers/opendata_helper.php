@@ -88,24 +88,48 @@ abstract class JSONOpenData extends OpenData {
 }
 
 function sottoindice_pm10($media) {
+    if (is_null($media))
+        return null;
     return ($media / 50.0 ) * 100.0;
 }
 
 function sottoindice_azoto($media) {
+    if (is_null($media))
+        return null;
     return ($media / 200.0 ) * 100.0;
 }
 
 function sottoindice_ozono($media) {
+    if (is_null($media))
+        return null;
     return ($media / 120.0 ) * 100.0;
 }
 
 function calcolo_iqa($pm10, $ozono, $azoto) {
     $list = array($pm10, $ozono, $azoto);
+
+    $null_count = 0;
+    foreach ($list as $a) {
+        if (is_null($a)) {
+            $null_count++;
+        }
+    }
+
+    if ($null_count >= 2) {
+        return null;
+    }
+
     sort($list, SORT_NUMERIC);
     array_shift($list);
     return ($list[0] + $list[1] ) / 2.0;
 }
 
 function nostroindice($iqa) {
-    return 5 - round(($iqa / 175 ) * 5, 2);
+    if (is_null($iqa))
+        return null;
+
+    //versione A / lineare
+    return 5 - round(($iqa / 200 ) * 5, 2);
+
+    //versione B / scala
 }
