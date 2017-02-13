@@ -43,6 +43,7 @@ class base_model extends CI_Model {
         $this->db->from('strutture');
         $this->db->join('comuni', 'comuni.codice = strutture.comune', 'left');
         $this->db->join('province', 'province.id_provincia = comuni.provincia', 'left');
+        $this->db->order_by('last_value', 'desc');
 
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
