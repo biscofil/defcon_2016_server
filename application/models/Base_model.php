@@ -7,9 +7,17 @@
  */
 class base_model extends CI_Model {
 
+    static $TB_strutture = 'strutture';
+
+    //strutture
+
+    public function nuova_struttura($s) {
+        $this->db->insert(self::$TB_strutture, $s);
+    }
+
     public function getStruttura($id) {
         $this->db->select('strutture.*,comuni.nome as nome_comune');
-        $this->db->from('strutture');
+        $this->db->from(self::$TB_strutture);
         $this->db->join('comuni', 'comuni.codice = strutture.comune', 'left');
         $this->db->join('province', 'province.id_provincia = comuni.provincia', 'left');
         $this->db->where('id', $id);
@@ -24,7 +32,7 @@ class base_model extends CI_Model {
 
     public function getSiteStruttura($id) {
         $this->db->select('strutture.*,comuni.nome as nome_comune');
-        $this->db->from('strutture');
+        $this->db->from(self::$TB_strutture);
         $this->db->join('comuni', 'comuni.codice = strutture.comune', 'left');
         $this->db->join('province', 'province.id_provincia = comuni.provincia', 'left');
         $this->db->where('id', $id);
@@ -40,7 +48,7 @@ class base_model extends CI_Model {
     public function getSiteStruttureRank() {
         //MY_TODO
         $this->db->select('strutture.*,comuni.nome as nome_comune');
-        $this->db->from('strutture');
+        $this->db->from(self::$TB_strutture);
         $this->db->join('comuni', 'comuni.codice = strutture.comune', 'left');
         $this->db->join('province', 'province.id_provincia = comuni.provincia', 'left');
         $this->db->order_by('last_value', 'desc');
@@ -55,7 +63,7 @@ class base_model extends CI_Model {
 
     public function getSiteStrutture() {
         $this->db->select('strutture.*,comuni.nome as nome_comune');
-        $this->db->from('strutture');
+        $this->db->from(self::$TB_strutture);
         $this->db->join('comuni', 'comuni.codice = strutture.comune', 'left');
         $this->db->join('province', 'province.id_provincia = comuni.provincia', 'left');
 
@@ -68,8 +76,8 @@ class base_model extends CI_Model {
     }
 
     public function getStrutture() {
-        $this->db->select('id,nome,lat,lng,last_value,last_value_date,url_img');
-        $this->db->from('strutture');
+        $this->db->select('id,nome,lat,lng,last_value');
+        $this->db->from(self::$TB_strutture);
 
         $query = $this->db->get();
         if ($query->num_rows() > 0) {
@@ -78,6 +86,8 @@ class base_model extends CI_Model {
         }
         return false;
     }
+
+    //dati
 
     public function getListOpendata($id = null) {
         $this->db->select('id,class_name');
@@ -121,7 +131,7 @@ class base_model extends CI_Model {
         return false;
     }
 
-    ///
+    /// punteggio
 
     public function avg($lat, $lng, $tab, $radius_km = 30) {
         $tab = 'dati_' . $tab;
@@ -148,7 +158,7 @@ class base_model extends CI_Model {
         $this->db->set('last_value_date', $data);
         $this->db->set('last_value', $punteggio);
         $this->db->where('id', $id);
-        $this->db->update('strutture');
+        $this->db->update(self::$TB_strutture);
     }
 
 }

@@ -29,6 +29,7 @@ abstract class OpenData {
 
     public function run() {
         try {
+            echo "interrogo  $this->url. ";
             $this->download();
             $this->_db_insert_data($this->custom_parse());
         } catch (Exception $exc) {

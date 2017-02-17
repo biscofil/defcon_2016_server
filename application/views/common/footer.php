@@ -1,7 +1,7 @@
 <hr>
 
 <footer>
-    <p>&copy; 2016 Company, Inc.</p>
+    <p></p>
 </footer>
 </div> <!-- /container -->
 
@@ -14,5 +14,13 @@
 <script src="<?= base_url() ?>public/bootstrap/js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="<?= base_url() ?>public/ie10-viewport-bug-workaround.js"></script>
+
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
+<?php
+//js files
+Jscsshandler::out_js_files();
+?>
+
 </body>
 </html>

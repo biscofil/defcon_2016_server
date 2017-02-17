@@ -4,6 +4,11 @@ class DataClass extends CI_Controller {
 
     public $data = array();
 
+    public function __construct() {
+        parent::__construct();
+        Jscsshandler::includeKnown('jquery');
+    }
+
 }
 
 class XhrController extends DataClass {
