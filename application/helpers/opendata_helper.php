@@ -164,7 +164,7 @@ function helper_gps_to_value($lat = null, $lng = null, $raw = true) {
     $lng = floatval($lng);
     $indice_pm10 = sottoindice_pm10($CI->base_model->avg($lat, $lng, 'pm10'));
     $indice_ozono = sottoindice_ozono($CI->base_model->avg($lat, $lng, 'ozono'));
-    $indice_azoto = 0; //sottoindice_azoto($this->base_model->avg($lat, $lng, 'azoto'));
+    $indice_azoto = sottoindice_azoto($CI->base_model->avg($lat, $lng, 'azoto'));
     $val = calcolo_iqa($indice_pm10, $indice_azoto, $indice_ozono);
     $k = nostroindice($val);
     if (!$raw) {
