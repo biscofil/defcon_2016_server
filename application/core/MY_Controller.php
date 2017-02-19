@@ -26,7 +26,7 @@ class XhrController extends DataClass {
         }
     }
 
-    private static function _success($data_label = null, $data = null, $return = false) {
+    protected static function _success($data_label = null, $data = null, $return = false) {
         $v = array('result' => 1);
         if (!is_null($data_label)) {
             $v[$data_label] = $data;
@@ -34,7 +34,7 @@ class XhrController extends DataClass {
         self::final_output($v, $return);
     }
 
-    private static function _error($err = "Errore non specificato", $data = null, $return = false) {
+    protected static function _error($err = "Errore non specificato", $data = null, $return = false) {
         $v = array('result' => 0, 'error' => $err);
         if (!is_null($data)) {
             $v['data'] = $data;

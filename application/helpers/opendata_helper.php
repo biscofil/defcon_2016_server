@@ -137,15 +137,22 @@ function nostroindice($iqa) {
 
 function get_update_indice($res) {
     $CI = &get_instance();
-    ///
-    $val = floatval($res['last_value']);
 
-    $datetime1 = new DateTime($res['last_value_date']);
-    $datetime2 = new DateTime("now");
-    $interval = $datetime2->diff($datetime1);
-    $aggiornato = intval($interval->format('%h')) < 1; //mettere cambiare
+    $last_update = $CI->base_model->getLastPunteggio($res['id']);
 
-    if ((!$aggiornato) || is_null($res['last_value'])) {
+    $aggiornato = true;
+
+    if (!is_null($last_update)) {
+        $val = floatval($last_update['last_value']);
+        $datetime1 = new DateTime($last_update['last_value_date']);
+        $datetime2 = new DateTime('now');
+        $interval = $datetime2->diff($datetime1);
+        $aggiornato = intval($interval->format('%h')) < 1; //mettere cambiare
+    }
+
+    $force = false;
+
+    if ($force || (!$aggiornato) || is_null($last_update)) {
         //calcola valore
         $val_new = helper_gps_to_value($res['lat'], $res['lng'], false);
         $CI->base_model->updatePunteggioStruttura($res['id'], date('Y-m-d H:i:s'), $val_new);
@@ -170,7 +177,7 @@ function helper_gps_to_value($lat = null, $lng = null, $raw = true) {
     if (!$raw) {
         return $k;
     } else {
-        echo json_encode(array('val' => $k, 'iqa' => $val, 'pm10' => $indice_pm10, 'ozono' => $indice_ozono, 'azoto' => $indice_ozono));
+        echo json_encode(array('val' => $k, 'iqa' => $val, 'pm10' => $indice_pm10, 'ozono' => $indice_ozono, 'azoto' => $indice_azoto));
     }
 }
 
