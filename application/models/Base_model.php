@@ -77,7 +77,7 @@ class base_model extends CI_Model {
     }
 
     public function getStrutture() {
-        $this->db->select('id,nome,lat,lng,last_value');
+        $this->db->select('id,nome,lat,lng', FALSE);
         $this->db->from(self::$TB_strutture);
 
         $query = $this->db->get();
@@ -120,12 +120,12 @@ class base_model extends CI_Model {
     }
 
     /// punteggio
-    public function raw_avg($lat, $lng, $tab, $radius_km = 30) {
+    public function raw_avg($lat, $lng, $tab, $radius_km = 20) {
         $tab = 'dati_' . $tab;
 
         $q = 'SELECT ' . $tab . '.valore as val,(111.1111 * DEGREES(ACOS(COS(RADIANS(' . $tab . '.lat)) * COS(RADIANS(' . $lat . '))'
                 . ' * COS(RADIANS(' . $tab . '.lng - ' . $lng . ')) + SIN(RADIANS(' . $tab . '.lat))* SIN(RADIANS(' . $lat . '))))) as distanza '
-                . ' FROM ' . $tab . ' WHERE  data = (SELECT MAX(data) FROM dati_pm10 as kk WHERE kk.id_opendata = id_opendata)'
+                . ' FROM ' . $tab . ' WHERE  data = (SELECT MAX(data) FROM ' . $tab . ' as kk WHERE kk.id_opendata = id_opendata)'
                 . ' HAVING distanza < ' . $radius_km;
 
         $query = $this->db->query($q)->result();

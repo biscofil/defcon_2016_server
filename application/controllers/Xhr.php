@@ -6,6 +6,12 @@ class Xhr extends XhrController {
 
     public function xhr_strutture() {
         $res = $this->base_model->getStrutture();
+
+        foreach ($res as $key => $struttura) {
+            $k = $this->base_model->getLastPunteggio($struttura['id']);
+            $res[$key]['last_value'] = $k['last_value'];
+        }
+
         self::def_end($res, 'dati', $res);
     }
 
@@ -21,6 +27,13 @@ class Xhr extends XhrController {
         $res['storico'] = $this->base_model->getStoricoStruttura($id);
 
         self::def_end($res, 'dati', $res);
+    }
+
+    public function xhr_force_update_all() {
+        $res = $this->base_model->getStrutture();
+        foreach ($res as $struttura) {
+            get_update_indice($struttura);
+        }
     }
 
     public function xhr_licenze() {

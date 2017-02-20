@@ -135,7 +135,7 @@ function nostroindice($iqa) {
     //versione B / scala
 }
 
-function get_update_indice($res) {
+function get_update_indice($res, $ignore = false) {
     $CI = &get_instance();
 
     $last_update = $CI->base_model->getLastPunteggio($res['id']);
@@ -150,15 +150,20 @@ function get_update_indice($res) {
         $aggiornato = intval($interval->format('%h')) < 1; //mettere cambiare
     }
 
-    $force = false;
-
-    if ($force || (!$aggiornato) || is_null($last_update)) {
+    if (((!$aggiornato) || is_null($last_update)) && (!$ignore)) {
         //calcola valore
         $val_new = helper_gps_to_value($res['lat'], $res['lng'], false);
-        $CI->base_model->updatePunteggioStruttura($res['id'], date('Y-m-d H:i:s'), $val_new);
 
-        $res['last_value_date'] = date('Y-m-d H:i:s');
-        $res['last_value'] = $val_new;
+        if (!is_null($val_new)) {
+            $CI->base_model->updatePunteggioStruttura($res['id'], date('Y-m-d H:i:s'), $val_new);
+
+            $res['last_value_date'] = date('Y-m-d H:i:s');
+            $res['last_value'] = $val_new;
+        } else {
+
+            $res['last_value_date'] = null;
+            $res['last_value'] = null;
+        }
 
         //aggiorno db
     }
@@ -182,7 +187,6 @@ function helper_gps_to_value($lat = null, $lng = null, $raw = true) {
 }
 
 function ColorHSLToRGB($h, $s, $l) {
-
     $r = $l;
     $g = $l;
     $b = $l;
