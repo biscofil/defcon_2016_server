@@ -130,7 +130,13 @@ function nostroindice($iqa) {
         return null;
 
     //versione A / lineare
-    return 5 - round(($iqa / 200 ) * 5, 2);
+
+    $kk = ($iqa / 175 );
+    if ($kk > 1) {
+        $kk = 1;
+    }
+
+    return 5 - round($kk * 5, 2);
 
     //versione B / scala
 }

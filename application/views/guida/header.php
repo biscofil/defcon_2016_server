@@ -29,6 +29,12 @@
         //properties
         Jscsshandler::out_js_properties();
         ?>
+
+        <style>
+            legend {
+                text-align: center;
+            }
+        </style>
     </head>
     <body>
         <div class="container">
