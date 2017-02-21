@@ -7,12 +7,9 @@ class Arpae1 extends JSONOpenData {
     }
 
     public function custom_parse() {
-
         $_pm10 = array();
         $_ozono = array();
         $_azoto = array();
-
-
 
         echo "<pre>";
         print_r($this->content);
