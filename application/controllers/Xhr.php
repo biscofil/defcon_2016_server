@@ -22,9 +22,15 @@ class Xhr extends XhrController {
 
         ///
 
-        $res = get_update_indice($res);
-
         $res['storico'] = $this->base_model->getStoricoStruttura($id);
+
+        if (false) {
+            $res = get_update_indice($res);
+        } else {
+            $last = $res['storico'][0];
+            $res['last_value_date'] = $last['last_value_date'];
+            $res['last_value'] = $last['last_value'];
+        }
 
         self::def_end($res, 'dati', $res);
     }
@@ -47,7 +53,12 @@ class Xhr extends XhrController {
      * @param type $lng
      */
     public function gps_to_value($lat = null, $lng = null, $raw = true) {
-        return helper_gps_to_value($lat, $lng, $raw);
+        $k = helper_gps_to_value($lat, $lng);
+        if ($raw) {
+            self::def_end(true, 'dati', $k);
+        } else {
+            return $k['val'];
+        }
     }
 
     /**

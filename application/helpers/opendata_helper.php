@@ -159,7 +159,7 @@ function get_update_indice($res, $ignore = false) {
     if (((!$aggiornato) || is_null($last_update)) && (!$ignore)) {
         //calcola valore
         $val_new = helper_gps_to_value($res['lat'], $res['lng'], false);
-
+        $val_new = $val_new['val'];
         if (!is_null($val_new)) {
             $CI->base_model->updatePunteggioStruttura($res['id'], date('Y-m-d H:i:s'), $val_new);
 
@@ -176,7 +176,7 @@ function get_update_indice($res, $ignore = false) {
     return $res;
 }
 
-function helper_gps_to_value($lat = null, $lng = null, $raw = true) {
+function helper_gps_to_value($lat = null, $lng = null) {
     $CI = &get_instance();
     $lat = floatval($lat);
     $lng = floatval($lng);
@@ -185,11 +185,7 @@ function helper_gps_to_value($lat = null, $lng = null, $raw = true) {
     $indice_azoto = sottoindice_azoto($CI->base_model->avg($lat, $lng, 'azoto'));
     $val = calcolo_iqa($indice_pm10, $indice_azoto, $indice_ozono);
     $k = nostroindice($val);
-    if (!$raw) {
-        return $k;
-    } else {
-        echo json_encode(array('val' => $k, 'iqa' => $val, 'pm10' => $indice_pm10, 'ozono' => $indice_ozono, 'azoto' => $indice_azoto));
-    }
+    return array('val' => $k, 'iqa' => $val, 'pm10' => $indice_pm10, 'ozono' => $indice_ozono, 'azoto' => $indice_azoto);
 }
 
 function ColorHSLToRGB($h, $s, $l) {
