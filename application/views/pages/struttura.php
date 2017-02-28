@@ -1,5 +1,4 @@
-<!-- Main jumbotron for a primary marketing message or call to action -->
-
+<link rel="stylesheet" href="http://defcon2016.altervista.org/public/badge/badge.min.css">
 
 <div class="jumbotron">
     <div class="container">
@@ -10,12 +9,14 @@
             </div>
             <div class="col-sm-8">
                 <h1><?= $struttura->nome ?></h1>
+                <div id="defcon2016_badge" data-key="<?= $struttura->id ?>"></div>
             </div>
         </div>
 
         <p><?= $struttura->descrizione ?></p>
-        <p><a class="btn btn-primary btn-lg" href="<?= $struttura->sito_web ?>" role="button">Vai al sito &raquo;</a></p>
+        <p>
+            <a class="btn btn-primary btn-lg" href="<?= $struttura->sito_web ?>" role="button">Vai al sito &raquo;</a>
+            <a class="btn btn-primary btn-lg" href="<?= site_url('badge/index/' . $struttura->id) ?>" role="button">Ottieni il badge</a>
+        </p>
     </div>
 </div>
-
-<pre><?php print_r($struttura); ?></pre>

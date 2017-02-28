@@ -17,8 +17,16 @@ class Strutture extends DataClass {
     }
 
     function s($id = null) {
+
+        Jscsshandler::addJsFile('http://defcon2016.altervista.org/public/badge/badge.min.js');
+
         if (!is_null($id)) {
             $this->data['struttura'] = $this->base_model->getSiteStruttura(intval($id));
+            if (!$this->data['struttura']) {
+                redirect('strutture');
+            }
+        } else {
+            redirect('strutture');
         }
 
         $this->load->view('common/header', $this->data);

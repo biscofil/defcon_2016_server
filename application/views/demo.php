@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>Bootstrap 101 Template</title>
+        <title>Badge - ECOme</title>
 
         <!-- Bootstrap -->
         <link href="<?= base_url('public/bootstrap/css/bootstrap.min.css') ?>" rel="stylesheet">
@@ -28,15 +28,13 @@
         <div class="container">
             <h2>Includere questo codice nella pagina</h2>
             <pre class="prettyprint">
-            &lt;div id=&quot;defcon2016_badge&quot; data-key=&quot;<span class="operative">INSERIRE_QUI_ID_STRUTTURA</span>&quot;&gt;&lt;/div&gt;
+            &lt;div id=&quot;defcon2016_badge&quot; data-key=&quot;<span class="operative"><?= is_null($id) ? 'INSERIRE_QUI_ID_STRUTTURA' : $id ?></span>&quot;&gt;&lt;/div&gt;
             &lt;link rel=&quot;stylesheet&quot; href=&quot;<?= base_url('public/badge/badge.min.css') ?>&quot;&gt;
             &lt;script src=&quot;https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js&quot;&gt;&lt;/script&gt;
             &lt;script src=&quot;<?= base_url('public/badge/badge.min.js') ?>&quot;&gt;&lt;/script&gt;
             </pre>
-
-
             <h2>Anteprima</h2>
-            <div id="defcon2016_badge" data-key="1"></div>
+            <div id="defcon2016_badge" data-key="<?= is_null($id) ? '1' : $id ?>"></div>
         </div>
 
 

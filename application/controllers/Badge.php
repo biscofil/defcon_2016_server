@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Badge extends CI_Controller {
 
     public function index($id = null) {
-        $this->load->view('demo');
+        $this->load->view('demo', array('id' => $id));
     }
 
     public function img($id = null) {
@@ -19,6 +19,17 @@ class Badge extends CI_Controller {
             header('Cache-Control: max-age=86400');
 
             $struttura = get_update_indice($struttura);
+
+
+            $struttura['storico'] = $this->base_model->getStoricoStruttura($id);
+
+            if (false) {
+                $struttura = get_update_indice($struttura);
+            } else {
+                $last = $struttura['storico'][0];
+                $struttura['last_value_date'] = $last['last_value_date'];
+                $struttura['last_value'] = $last['last_value'];
+            }
 
             $im = imagecreatefrompng("public/badge/back2.png");
 

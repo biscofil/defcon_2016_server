@@ -48,13 +48,15 @@ class base_model extends CI_Model {
 
     public function getSiteStruttureRank() {
         //MY_TODO
-        $this->db->select('strutture.*,comuni.nome as nome_comune');
-        $this->db->from(self::$TB_strutture);
-        $this->db->join('comuni', 'comuni.codice = strutture.comune', 'left');
-        $this->db->join('province', 'province.id_provincia = comuni.provincia', 'left');
-        $this->db->order_by('last_value', 'desc'); // MY_TODO prenderlo da altra tabella
+        /* $this->db->select('strutture.*,comuni.nome as nome_comune');
+          $this->db->from(self::$TB_strutture);
+          $this->db->join('comuni', 'comuni.codice = strutture.comune', 'left');
+          $this->db->join('province', 'province.id_provincia = comuni.provincia', 'left');
+          $this->db->order_by('last_value', 'desc'); // MY_TODO prenderlo da altra tabella */
 
-        $query = $this->db->get();
+        $query = $this->db->query("SELECT DISTINCT(id_struttura),last_value,strutture.* FROM storico INNER JOIN strutture ON strutture.id = id_struttura ORDER BY last_value DESC ");
+
+        //$query = $this->db->get();
         if ($query->num_rows() > 0) {
             $row = $query->result();
             return $row;
